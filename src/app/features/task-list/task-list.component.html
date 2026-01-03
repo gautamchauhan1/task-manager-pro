@@ -1,0 +1,21 @@
+<div class="container">
+  <h3 class="mb-3">My Tasks</h3>
+
+  <ul class="list-group">
+    
+    <li *ngFor="let task of taskList$ | async" 
+        class="list-group-item d-flex justify-content-between align-items-center">
+      
+      {{ task.title }}
+      
+      <button class="btn btn-danger btn-sm" (click)="onDelete(task.id)">
+        Delete
+      </button>
+
+    </li>
+  </ul>
+  
+  <div *ngIf="(taskList$ | async)?.length === 0" class="alert alert-info mt-3">
+    No tasks available. Add some!
+  </div>
+</div>
