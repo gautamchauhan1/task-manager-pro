@@ -1,9 +1,31 @@
-<div class="container mt-5">
-  <h1>Task Manager Pro</h1>
-  <hr>
+
+<app-task-add></app-task-add>
+
+<nav class="navbar-container">
+  <button routerLink="/rxjs-operators" routerLinkActive="active-link" class="nav-btn">
+    Operators
+  </button>
+
+    <button routerLink="/maps" routerLinkActive="active-link" class="nav-btn">
+    Merge, Concat, Switch Map
+  </button>
   
-  <app-task-list></app-task-list>
+  <button routerLink="/map-filter" routerLinkActive="active-link" class="nav-btn">
+    Map & Filter
+  </button>
+  
+  <button routerLink="/subjects" routerLinkActive="active-link" class="nav-btn">
+    Subjects
+  </button>
 
+  <button routerLink="/lifecyclehooks" routerLinkActive="active-link" class="nav-btn">
+    Lifecycle Hooks
+  </button>
+
+  <button routerLink="/homework-task" routerLinkActive="active-link" class="nav-btn">Homework Task</button>
+</nav>
+
+<div class="content-area">
   <router-outlet></router-outlet>
-
 </div>
+<hr>

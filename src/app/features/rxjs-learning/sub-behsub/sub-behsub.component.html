@@ -1,0 +1,22 @@
+<br>
+<div class="card p-4 gap-3">
+  <h3 class="mb-3">Subject vs BehaviorSubject</h3>
+  <p class="text-muted">
+    Click buttons to understand how they handle <b>Late Subscribers</b>.
+  </p>
+  
+  <div class="d-flex gap-3 mb-4">
+    <button class="btn btn-danger" (click)="runSubjectDemo()">
+      📡 Test Subject
+      <br><small>(No Memory)</small>
+    </button>
+    
+    <button class="btn btn-success" (click)="runBehaviorSubjectDemo()">
+      🧠 Test BehaviorSubject
+      <br><small>(Has Memory)</small>
+    </button>
+  </div>
+
+  <div *ngFor="let l of logs ">{{l}}</div>
+  
+</div>

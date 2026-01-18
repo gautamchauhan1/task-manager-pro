@@ -1,0 +1,29 @@
+
+<h3>Product wishlist count {{productService.wishlistCount$ | async}} </h3>
+<input type="text" #inputbox placeholder="search your product here">
+
+<div *ngIf="errorMessage">
+
+    <p>{{errorMessage}}</p>
+
+</div>
+
+<div *ngIf="isLoading">
+    <p>Loading data...</p>
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+
+    <div *ngFor="let prod of product" style="display: flex; justify-content: space-between; align-items: center; padding: 5px; margin: 5px; border-radius: 5px; border: 1px solid #eee">
+       
+       <span>{{prod}}</span> 
+
+        <button (click)="addWishlist()" style="background: green; color: white; padding: 5px; border-radius: 2px; border: none; cursor: pointer;">+ Add to Wishlist</button>
+    </div>
+
+
+</div>
+
+<div *ngIf="product.length ===0 && !isLoading && !errorMessage">
+    <p>Try something to start search</p>
+</div>

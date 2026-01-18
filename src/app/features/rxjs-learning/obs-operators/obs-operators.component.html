@@ -1,0 +1,51 @@
+<!-- Exhaust Map -->
+<div class="d-flex gap-4">
+  <button class="btn" id="save-btn" style="padding: 10px; background-color: forestgreen; color: white;">Save Data (do some clicks at once)</button>
+</div>
+
+<hr>
+
+<!-- Debounce Time and DistinctUntilChanged -->
+<div class="d-flex gap-4" style="display: flex; flex-direction: column; width: 400px;">
+  <h3>Professional Search Bar</h3>
+  <label for="">Debounce Time and DistinctUntilChanged</label>
+  <input type="text" id="search-box" placeholder="type here to call API">
+  <span>Open console screen to see the result</span>
+</div>
+<hr>
+
+<!-- forkJoin -->
+<div class="d-flex gap-4">
+  <span style="background: orangered; color: #fff;">Learn forkJoin: check the console screen <strong>ngOnInit</strong></span> <br>
+</div>
+
+<hr>
+<br>
+<h3>of and from Operator</h3>
+<div  class="d-flex gap-4">
+<button class="btn btn-primary" (click)="showOfDemo()">
+      Test 'OF' (Check Console)
+    </button>
+    
+    <button class="btn btn-success" (click)="showFromDemo()">
+      Test 'FROM' (Check Console)
+    </button>
+</div>
+
+<hr>
+<h3>Timer Interval (Time Operations)</h3>
+<div class="d-flex gap-3">
+<button class="btn btn-warning" (click)="startInterval()">Start Interval (1s)</button>
+<!-- <button class="btn btn-danger" (click)="stopInterval()">Stop Interval</button> -->
+<button class="btn btn-warning" (click)="startTimer()">Start Timer (3s delay)</button>
+<!-- <button class="btn btn-danger" (click)="stopTimer()">Stop Timer</button> -->
+</div>
+
+
+<h3>Timer: {{myNumbers$ |async}}</h3>
+
+<div class="m-3">
+  <h4>SwitchMap, DeBounce and ngAfterViewInit</h4>
+  <label>Type Something:</label>
+  <input type="text" placeholder="Type here..." #input>
+</div>

@@ -10,6 +10,7 @@ export interface Task {
 @Injectable({
   providedIn: 'root'
 })
+
 export class TaskService {
 
   private initialTasks: Task[] = [
@@ -20,7 +21,7 @@ export class TaskService {
   // Ye State Manager hai (Data Store)
   private taskSubject = new BehaviorSubject<Task[]>(this.initialTasks);
   
-  // Isko components use karenge data dekhne ke liye
+  // Isko components use karenge data dekhne ke liye, taki data me koi change na kar ske
   tasks$ = this.taskSubject.asObservable();
 
   constructor() { }

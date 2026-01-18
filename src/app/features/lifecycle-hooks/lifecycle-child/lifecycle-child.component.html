@@ -1,0 +1,40 @@
+<div class="card bg-light border-success mt-3">
+  <div class="card-body">
+    <h4 class="card-title text-success">Child</h4>
+    
+    <p class="card-text">
+      Data received from Parent: 
+      <span class="badge bg-success fs-6">{{ parentData }}</span>
+    </p>
+  </div>
+</div>
+
+  <hr>
+
+  <div class="card p-3">
+  <h4>ViewChild Demo</h4>
+  <input type="text" #myInputBox placeholder="I will turn Red!">
+</div>
+
+<div style="border: 2px dashed green; padding: 20px; margin-top: 10px;">
+      <p class="text-muted">👇 Below is Projected Content:</p>
+      
+      <ng-content></ng-content>
+      
+    </div>
+
+
+  <!-- Use of Service Using Behavior Subject  -->
+  <div style="border: 2px dashed green; padding: 20px; margin-top: 10px;">
+    <h3>((Subject and Behavior Subject inject service)) </h3>
+  <h4 style="color: green;">Child Component (Behavior Subject)</h4>
+  
+  <p>Change name from here via Life Service:</p>
+  
+  <input type="text" placeholder="Enter New Name" #box>
+  
+  <button (click)="updateName(box.value)" style="margin-left: 10px;">
+    Update Parent Data 🚀
+  </button>
+  <span>check below parent component changed data</span>
+</div>

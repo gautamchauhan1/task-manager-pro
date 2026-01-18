@@ -1,0 +1,111 @@
+
+  
+
+
+<div class="container" style="max-width: 500px; margin: 20px auto; border: 1px solid #ccc; padding: 20px; border-radius: 8px;">
+  <div style="margin-bottom: 20px;">
+  <button style="width: 100%; background: #000000; color: aliceblue; cursor: pointer; border: none; border-radius: 4px;" class="form-control" type="button" (click)="editFormData()">Edit Task Form</button>
+</div>
+
+  <h2>➕ Add New Task</h2>
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+    <div style="margin-bottom: 15px;">
+      <label>Title <span style="color: red;">*</span></label>
+      <input type="text" formControlName="title" class="form-control" placeholder="Enter task title">
+      
+      <small style="color: red;" 
+             *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.hasError('required')">
+        Title is required!
+      </small>
+      <small style="color: red;" 
+             *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.hasError('minlength')">
+        Title must be at least 5 chars!
+    </small>
+
+    <small style="color: red;" *ngIf="taskForm.get('title')?.hasError('testwordError')">
+      Error: Title could not contains word 'test'</small>
+      
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Description</label>
+      <textarea formControlName="description" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Due Date <span style="color: red;">*</span></label>
+      <input type="date" formControlName="dueDate" class="form-control">
+
+      <small style="color: red;"
+       *ngIf="taskForm.get('dueDate')?.touched && taskForm.get('dueDate')?.hasError('required')">Due date is required</small>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Priority</label>
+      <select formControlName="priority" class="form-control">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+
+
+    <div style="margin-bottom: 15px;">
+      <label>Enter Email</label>
+      <input type="email" formControlName="email" class="form-control" placeholder="enter email here">
+      <small style="color: red;" *ngIf="taskForm.get('email')?.touched && taskForm.get('email')?.hasError('email')">Enter a valid email</small>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label>Confirm Email</label>
+      <input type="email" formControlName="confirmEmail" class="form-control" placeholder="enter email again">
+      <small *ngIf="taskForm.get('confirmEmail')?.touched && taskForm.get('confirmEmail')?.hasError('required')">enter Email you can not left it blank</small>
+      <small *ngIf="taskForm.errors?.['EmailMismatch']" style="color: red;">Emails do not match!</small>
+    </div>
+
+    <div style="margin-bottom: 15px; display: flex; align-items: center;">
+      
+      <input type="checkbox" formControlName="isMeeting" id="meetingCheck" 
+             style="width: 20px; height: 20px; margin-right: 10px;">
+      
+      <label for="meetingCheck" style="cursor: pointer;">Is this a meeting?</label>
+    </div>
+
+    <div *ngIf="taskForm.get('isMeeting')?.value" 
+         style="margin-bottom: 15px; background: #f9f9f9; padding: 10px; border: 1px dashed #ccc;">
+      
+      <label>Meeting Link <span style="color: red;">*</span></label>
+      <input type="text" formControlName="meetingLink" class="form-control" placeholder="Paste Zoom/Teams link here">
+
+      <small style="color: red;" 
+             *ngIf="taskForm.get('meetingLink')?.touched && taskForm.get('meetingLink')?.hasError('required')">
+        Link is required for meetings!
+      </small>
+
+    </div>
+
+    <div style="border-top: 1px solid seagreen; margin-top: 20px; padding-top: 10px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <label>Sub-Tasks</label>
+      <button type="button" (click)="addSubTask()" style="background: green; border: none; padding: 5px 10px; color: #fff; cursor: pointer; border-radius: 4px;">+ Add</button>
+
+      </div>
+      <div formArrayName="subTasks">
+        <div *ngFor="let control of subTasksArray.controls; let i=index" style="display: flex; gap: 10px; margin-bottom: 10px;">
+          <input type="text" [formControlName]="i" class="form-control" placeholder="enter sub-task..." style="margin-top: 0;">
+          <button type="button" (click)="removeSubTask(i)" style="background: red; color: #fff; border: none; cursor: pointer; border-radius: 4px; padding: 0 10px;">🗑️</button>    
+          <small *ngIf="control.invalid && control.touched" style="color: red;">Sub-Task can not be empty!</small>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="save-btn" [disabled]="taskForm.invalid" 
+            style="padding: 10px 20px; border: none; cursor: pointer;">
+      Save Task
+    </button>
+
+  </form>
+
+</div>
