@@ -1,0 +1,12 @@
+
+<div class="card-body">
+<div class="col-md-10">
+    <button (click)="toggleForm()" class="text-primary mb-3 w-100">{{ isFormVisible? 'Close Form':   '➕ Add New Task'}}</button>
+<app-new-task-form [taskData]="tasktoEdit" *ngIf="isFormVisible" (taskAdded)="taskList.getAllTasks(); isFormVisible=false"></app-new-task-form>
+
+<div class="col-md-12">
+<h5 class="text-success mb-3">All Task Lists</h5>
+<app-new-task-display #taskList (onEdit)="loadTask($event)"></app-new-task-display>
+</div>
+</div>
+</div>

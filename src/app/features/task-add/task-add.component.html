@@ -1,12 +1,4 @@
-
-  
-
-
 <div class="container" style="max-width: 500px; margin: 20px auto; border: 1px solid #ccc; padding: 20px; border-radius: 8px;">
-  <div style="margin-bottom: 20px;">
-  <button style="width: 100%; background: #000000; color: aliceblue; cursor: pointer; border: none; border-radius: 4px;" class="form-control" type="button" (click)="editFormData()">Edit Task Form</button>
-</div>
-
   <h2>➕ Add New Task</h2>
 
   <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
@@ -101,10 +93,15 @@
       </div>
     </div>
 
+    <div style="display: flex; justify-content: space-between;">
     <button type="submit" class="save-btn" [disabled]="taskForm.invalid" 
             style="padding: 10px 20px; border: none; cursor: pointer;">
       Save Task
     </button>
+
+    <button type="button" (click)="onCancel()" style=" background: red; color: #fff; padding: 10px 20px; border: none; cursor: pointer;">Cancel</button>
+    </div>
+
 
   </form>
 

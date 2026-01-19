@@ -1,21 +1,27 @@
-<div class="container">
-  <h3 class="mb-3">My Tasks</h3>
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>📋 My Tasks List</h3>
+    
+    <button *ngIf="!showTaskForm" class="btn btn-primary" (click)="openForm()">
+      ➕ Add New Task
+    </button>
+  </div>
+
+  <div *ngIf="showTaskForm" class="mb-4 border p-3 rounded shadow-sm bg-light">
+    <!-- event emiter from child - closeForm -->
+    <app-task-add (closeForm)="closeFormAndRefresh()"></app-task-add>
+  
+  </div>
 
   <ul class="list-group">
-    
-    <li *ngFor="let task of taskList$ | async" 
-        class="list-group-item d-flex justify-content-between align-items-center">
-      
-      {{ task.title }}
-      
-      <button class="btn btn-danger btn-sm" (click)="onDelete(task.id)">
-        Delete
-      </button>
-
+    <li *ngFor="let task of tasks" class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <strong>{{ task.title }}</strong>
+        <span class="badge bg-secondary ms-2">{{ task.priority }}</span>
+      </div>
+      <button class="btn btn-danger btn-sm" (click)="onDelete(task.id!)">Delete</button>
     </li>
   </ul>
-  
-  <div *ngIf="(taskList$ | async)?.length === 0" class="alert alert-info mt-3">
-    No tasks available. Add some!
-  </div>
+
 </div>

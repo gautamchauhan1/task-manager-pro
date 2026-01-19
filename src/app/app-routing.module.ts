@@ -6,6 +6,7 @@ import { SubBehsubComponent } from './features/rxjs-learning/sub-behsub/sub-behs
 import { LifecycleHooksComponent } from './features/lifecycle-hooks/lifecycle-hooks.component';
 import { MergeConcatSwitchMapComponent } from './features/rxjs-learning/merge-concat-switch-map/merge-concat-switch-map.component';
 import { HomeworkTaskComponent } from './features/homework-task/homework-task.component';
+import { CrudAppComponent } from './features/crud-app/crud-app/crud-app.component';
 
 const routes: Routes = [
   {path:'rxjs-operators', component: ObsOperatorsComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:'lifecyclehooks', component: LifecycleHooksComponent},
   {path: 'maps', component: MergeConcatSwitchMapComponent},
   {path: 'homework-task', component: HomeworkTaskComponent},
+  {path: 'master-crud', component: CrudAppComponent},
   {path:'', redirectTo: '/operators', pathMatch: 'full'} // Default page
 ];
 

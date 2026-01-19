@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { TaskService } from 'src/app/core/services/task.service';
 
 @Component({
   selector: 'app-task-add',
@@ -10,12 +11,16 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 export class TaskAddComponent implements OnInit {
 
   taskForm!: FormGroup;
-  constructor(private fb: FormBuilder){}
+  constructor(private fb: FormBuilder, private taskService: TaskService){}
+
+  @Output() closeForm = new EventEmitter<void>();
+
   ngOnInit(): void {
     this.initForm();
     this.handleMeetingChange();
     this.fn_valueChanges();
   }
+
 
   //ValueChanges
   fn_valueChanges(){
@@ -46,7 +51,7 @@ export class TaskAddComponent implements OnInit {
       priority: ['low', [Validators.required]], // Default value 'low'
       isMeeting: [false],
       email: ['', [Validators.required, Validators.email]],
-      confirmEmail: ['', Validators.required, Validators.email],
+      confirmEmail: ['', [Validators.required, Validators.email]],
       meetingLink:[''], // no validation at initial
       subTasks: this.fb.array([]), // empty array
     },
@@ -133,14 +138,38 @@ alert('Data loaded successfully')
     {
       console.log('form submitted', this.taskForm.value);
       
+      this.taskService.addTask(this.taskForm.value).subscribe({
+        next: (res)=>
+        {
+          console.log('Data saved', res);
+          this.taskForm.reset();
+          this.taskForm.get('priority')?.setValue('low');
+          this.subTasksArray.clear();     
+          // 👇 Save hone ke baad Parent ko signal bhejo
+          this.closeForm.emit();     
+        },
+        error: (err)=>
+        {
+          console.log('Server error', err);
+          alert('Check ApI server');         
+        }
+      })
+
     }
     else
     {
       console.log('form invalid');
       // Form ke sare controls ko 'touched' mark kar do taaki errors dikh jaye
+
       this.taskForm.markAllAsTouched();   
     }
   }
+
+  onCancel()
+{
+  this.closeForm.emit();
+}
+
 }
 
 // from custome Validators functions

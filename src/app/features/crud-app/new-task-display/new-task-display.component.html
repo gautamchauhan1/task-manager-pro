@@ -1,0 +1,25 @@
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>ID</th>
+            <th>Task Title</th>
+            <th>Due Date</th>
+            <th>Priority</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let t of tasks">
+            <td>{{t.id}}</td>
+            <td>{{t.title}}</td>
+            <td>{{t.dueDate}}</td>
+            <td [class]="{'text-danger':t.priority ==='high', 'text-success': t.priority ==='low', 'text-warning': t.priority==='medium'}">{{t.priority | uppercase}}</td>
+            <td>
+                <button (click)="deleteTask(t.id!)" class="btn btn-danger btn-sm me-2">Delete</button>
+                <button (click)="editTask(t)" class="btn btn-primary btn-sm me-2">Edit ✏️</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="tasks.length===0" class="alert aler-info">No tasks Found. Add one!</div>

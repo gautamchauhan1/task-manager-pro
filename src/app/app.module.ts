@@ -11,6 +11,11 @@ import { RxjsLearningModule } from './features/rxjs-learning/rxjs-learning.modul
 import { LifecycleHooksComponent } from './features/lifecycle-hooks/lifecycle-hooks.component';
 import { LifecycleChildComponent } from './features/lifecycle-hooks/lifecycle-child/lifecycle-child.component';
 import { HomeworkTaskComponent } from './features/homework-task/homework-task.component';
+import {HttpClientModule} from '@angular/common/http';
+import { CrudAppComponent } from './features/crud-app/crud-app/crud-app.component';
+import { NewTaskFormComponent } from './features/crud-app/new-task-form/new-task-form.component';
+import { NewTaskDisplayComponent } from './features/crud-app/new-task-display/new-task-display.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -21,13 +26,18 @@ import { HomeworkTaskComponent } from './features/homework-task/homework-task.co
     LifecycleHooksComponent,
     LifecycleChildComponent,
     HomeworkTaskComponent,
+    CrudAppComponent,
+    NewTaskFormComponent,
+    NewTaskDisplayComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RxjsLearningModule
+    RxjsLearningModule,
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

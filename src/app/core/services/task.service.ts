@@ -1,43 +1,49 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core'; 
+import { Observable } from 'rxjs';
+
+
+export interface TaskItem {
+id?: number;
+title: string;
+dueDate: string;
+priority: string;
+}
 
 export interface Task {
-  id: number;
-  title: string;
-  isCompleted: boolean;
+id?: number;
+title: string;
+description?: string;
+dueDate: string;
+priority: string;
+email: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class TaskService {
+  private apiUrl = 'http://localhost:3000/tasks';
+  constructor(private http: HttpClient){}
 
-  private initialTasks: Task[] = [
-    { id: 1, title: 'Learn Angular 16', isCompleted: false },
-    { id: 2, title: 'Build Project', isCompleted: false }
-  ];
-
-  // Ye State Manager hai (Data Store)
-  private taskSubject = new BehaviorSubject<Task[]>(this.initialTasks);
-  
-  // Isko components use karenge data dekhne ke liye, taki data me koi change na kar ske
-  tasks$ = this.taskSubject.asObservable();
-
-  constructor() { }
-
-  addTask(title: string) {
-    const newTask: Task = {
-      id: Date.now(),
-      title: title,
-      isCompleted: false
-    };
-    const updatedTasks = [...this.taskSubject.value, newTask];
-    this.taskSubject.next(updatedTasks);
+  // GET request
+  getAllTasks(): Observable<TaskItem[]>{
+    return this.http.get<TaskItem[]>(this.apiUrl);
   }
 
-  deleteTask(id: number) {
-    const updatedTasks = this.taskSubject.value.filter(task => task.id !== id);
-    this.taskSubject.next(updatedTasks);
+  // POST request
+  addTask(task:any): Observable<TaskItem>{
+    return this.http.post<TaskItem>(this.apiUrl, task);
+  }
+
+  //DELETE task
+  deleteTask(id:number): Observable<any>{
+    return this.http.delete(`${this.apiUrl}/${id}`)
+    //http://localhost:3000/tasks/1
+  }
+
+  // UPDATE task
+  updateTask(id:number, task:any): Observable<TaskItem>{
+    return this.http.put<TaskItem>(`${this.apiUrl}/${id}`, task)
   }
 }

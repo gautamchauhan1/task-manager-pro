@@ -1,0 +1,25 @@
+    
+    <div style="width: 400px; margin: 10px auto;">
+        <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="p-3 border rounded">
+        <div class="mb-2 mt-2">
+            <label for="">Enter Task Title</label>
+            <input type="text" id="" formControlName="title" class="form-control">
+        </div>
+
+        <div class="mb-2 mt-2">
+            <label for="">Date</label>
+            <input type="date" formControlName="dueDate" class="form-control">
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label>Priority</label>
+           <select formControlName="priority" class="form-select">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+           </select>
+            </div>
+
+            <button type="submit" [disabled]="taskForm.invalid" class="btn btn-primary w-100">{{editId? 'Update Task' : 'Save Task'}}</button>
+    </form>
+</div>
